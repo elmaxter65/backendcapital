@@ -29,7 +29,7 @@ This is a simple REST API for a product catalog built with Node.js, Express, and
 - `GET /products/id/:id`: Retrieves one product by its identifier (ID) with all product information.
 - `DELETE /products/:id`: Deletes one product by its identifier (ID).
 - `PATCH /products/:id`: Modifies any attribute beside id and createdAt.
-
+- `POST /products`: Create a new product with the provided information.
 ## Note
 
 Make sure to change the MongoDB URI in the `index.js` file to your local MongoDB instance.
