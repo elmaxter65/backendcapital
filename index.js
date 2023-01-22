@@ -180,6 +180,15 @@ app.post('/products', (req, res) => {
                     // 4. Assign the new name to the product
                     product.name = newName;
                 }
+            });
+        }
+        //1. Check if the id already exists in the database
+        Product.findOne({Id: product.Id}, (err, existingProduct) => {
+            if (err) {
+                res.status(500).send(err);
+            } else if (existingProduct) {
+                res.status(400).send({message: 'El ID del producto ya existe en la base de datos'});
+            } else {
                 // 5. Save the new product in the database
                 product.save((err, product) => {
                     if (err) {
@@ -188,17 +197,8 @@ app.post('/products', (req, res) => {
                         res.status(201).json(product);
                     }
                 });
-            });
-        } else {
-            // 5. Save the new product in the database
-            product.save((err, product) => {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    res.status(201).json(product);
-                }
-            });
-        }
+            }
+        });
     });
 });
 
